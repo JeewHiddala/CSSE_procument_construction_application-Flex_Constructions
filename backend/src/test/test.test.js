@@ -68,8 +68,18 @@ app.use('/deliveryAdviceNote', deliveryAdviceNoteAPI());
 app.use('/invoice', invoiceAPI());      
 app.use('/good', goodAPI());
 
+//Object ids
+let paymentTest = "";
+let goodTest = "";
+let logTest = "";
+let deliveryTest = "";
+let itemTest = "";
+let orderTest = "";
+let supplierTest = "";
+let employeeTest = "";
 
 //TestCases
+//test case 01 - add details -8
 //test case 01 - add payment
 test('Backend Test Case 01 - Should insert a new payment', async () => {
     await request(app).post('/payment/create').send({
@@ -77,9 +87,9 @@ test('Backend Test Case 01 - Should insert a new payment', async () => {
         date: "2021-09-24T00:00:00.000+00:00",
         price: 60000,
         description:"Visa or master card payments",
-        invoiceId:"6158b524f5581d8e74c2c736",
+        invoiceId:"6162b2b2fff9f99515c181e3",
     }).expect(200).then((res) => {
-        id = res.body._id;
+        paymentTest = res.body.data["_id"];
     });
 })
 
@@ -87,42 +97,42 @@ test('Backend Test Case 01 - Should insert a new payment', async () => {
 test('Backend Test Case 02 - Should insert a new log', async () => {
     await request(app).post('/log/create').send({
         descriptions:"change to approved",
-        orderRef: "6159dac4ce25f7ccbfd45158"
+        orderRef: "6162a7ab3078af8b2b3ac504"
     }).expect(200).then((res) => {
-        id = res.body._id;
+        logTest = res.body.data["_id"];
     });
 })
 
 
-//test case 02 - add log
-test('Backend Test Case 01 - Should insert a new delivery', async () => {
+// //test case 03 - add delivery
+test('Backend Test Case 03 - Should insert a new delivery', async () => {
     await request(app).post('/delivery/create').send({
     deliveryId: "23435",
     deliveryDate: "2021-08-24T18:30:00.000+00:00" ,
     numOfItems: 5,
     totalPrice: 3500,
     weight: 280,
-    supplier: "615aab713a408e6c619b6d53",
-    orderRef: "6159dab8ce25f7ccbfd45156",
+    supplier: "6162a7ab3078af8b2b3ac506",
+    orderRef: "6162a7ab3078af8b2b3ac504",
     items: ["615a3b3c46370bf2ea8b51be"],
     }).expect(200).then((res) => {
-        id = res.body._id;
+        deliveryTest = res.body.data["_id"];
     });
 })
 
-//test case 02 - add log
-test('Backend Test Case 01 - Should insert a new item', async () => {
+// //test case 04 - add item
+test('Backend Test Case 04 - Should insert a new item', async () => {
     await request(app).post('/item/create').send({
         quantity:2,
         individualTotprice:1400,
-        itemId:"615a3b3c46370bf2ea8b51be0",
+        itemId:"6162b16234f3ff3e957d29a6",
     }).expect(200).then((res) => {
-        id = res.body._id;
+        itemTest = res.body.data["_id"];
     });
 })
 
-//test case 02 - add log
-test('Backend Test Case 01 - Should insert a new item', async () => {
+// //test case 05 - add order
+test('Backend Test Case 05 - Should insert a new order', async () => {
     await request(app).post('/order/create').send({
         orderRefNo:"003",
         description:"Namal Hardware",
@@ -132,29 +142,29 @@ test('Backend Test Case 01 - Should insert a new item', async () => {
         totalPrice:"158000",
         approvalStatus:"Declined",
         orderStatus:"Pending",
-        site: "6158a15b61eddafb1da8c6e6",
-        supplier: "61583c3ab7cf1ef72d638de5",
-        items: "6158b0f2bee91146251189d4"
+        site: "6162b739fff9f99515c181ff",
+        supplier: "6162a7ab3078af8b2b3ac506",
+        items: ["6162b5d246d3654b39c0a815"]
     }).expect(200).then((res) => {
-        id = res.body._id;
+        orderTest = res.body.data["_id"];
     });
 })
 
-//test case 02 - add log
-test('Backend Test Case 01 - Should insert a new item', async () => {
+// //test case 06 - add supplier
+test('Backend Test Case 06 - Should insert a new supplier', async () => {
     await request(app).post('/supplier/create').send({
         supplierId:"CD-09-4572",
         supplierName:"Hasitha",
         address:"Biyagama",
         contactNo:"215546222",
     }).expect(200).then((res) => {
-        id = res.body._id;
+        supplierTest = res.body.data["_id"];
     });
 })
 
 
-//test case 02 - add log
-test('Backend Test Case 01 - Should insert a new item', async () => {
+// //test case 07 - add employee
+test('Backend Test Case 07 - Should insert a new employee', async () => {
     await request(app).post('/employee/create').send({
         empId:"253",
         empName:"Isira Bandara",
@@ -163,39 +173,39 @@ test('Backend Test Case 01 - Should insert a new item', async () => {
         salary:"450000",
         position: "Site Manager"
     }).expect(200).then((res) => {
-        id = res.body._id;
+        employeeTest = res.body.data["_id"];
     });
 })
 
-//test case 02 - add log
-test('Backend Test Case 01 - Should insert a new item', async () => {
+// //test case 08 - add log
+test('Backend Test Case 08 - Should insert a new good', async () => {
     await request(app).post('/good/create').send({
         goodId:"54548",
         goodName:"Cement",
         description:"Polymer",
         itemPrice: "990"
     }).expect(200).then((res) => {
-        id = res.body._id;
+        goodTest = res.body.data["_id"];
     });
 })
 
 
-//test case 02 - Update details
-test('Backend Test Case 02 - Should update existing payment details ', async () => {
-    await request(app).patch('/payment/update/6158b6a81b9b8448562b1144').send({
-        payId: 498,
-        date: "2021-09-24T00:00:00.000+00:00",
-        price: 60000,
-        description:"Visa or master card payments",
-        invoiceId:"6158b524f5581d8e74c2c736",
-    }).expect(200).then((res) => {
-        id = res.body._id;
-    });
-})
+//test case 02 - Update details -8
+// test('Backend Test Case 02 - Should update existing payment details ', async () => {
+//     await request(app).patch(`/payment/update/${paymentTest}`).send({
+//         payId: 49,
+//         date: "2021-09-24T00:00:00.000+00:00",
+//         price: 50000,
+//         description:"Visa or master card payments",
+//         invoiceId:"6162b2b2fff9f99515c181e3",
+//     }).expect(200).then((res) => {
+//         id = res.body._id;
+//     });
+// })
 
 
-test('Backend Test Case 02 - Should update existing log details ', async () => {
-    await request(app).patch('/log/update/615acb4982ce97706829b580').send({
+test('Backend Test Case 09 - Should update existing log details ', async () => {
+    await request(app).patch(`/log/update/${logTest}`).send({
         descriptions:"change to approved",
         orderRef: "6159dac4ce25f7ccbfd45158"
     }).expect(200).then((res) => {
@@ -205,27 +215,27 @@ test('Backend Test Case 02 - Should update existing log details ', async () => {
 
 
 
-test('Backend Test Case 02 - Should update existing delivery details ', async () => {
-    await request(app).patch('/delivery/update/615b2c2ac5dab5e91e427045').send({
-        deliveryId:73686,
-        deliveryDate:"2021-10-20T00:00:00.000+00:00",
-        numOfItems:5,
-        totalPrice:3500,
-        weight:7,
-        supplier:"615ab95e3a408e6c619b6d5f",
-        orderRef:"6159dc34d6f0055d45cf9c05"
-    }).expect(200).then((res) => {
-        id = res.body._id;
-    });
-})
+// test('Backend Test Case 02 - Should update existing delivery details ', async () => {
+//     await request(app).patch(`/delivery/update/${deliveryTest}`).send({
+//         deliveryId:73686,
+//         deliveryDate:"2021-10-20T00:00:00.000+00:00",
+//         numOfItems:5,
+//         totalPrice:3500,
+//         weight:10,
+//         supplier:"6162a7ab3078af8b2b3ac506",
+//         orderRef:"6162a7ab3078af8b2b3ac504"
+//     }).expect(200).then((res) => {
+//         id = res.body._id;
+//     });
+// })
 
 
 
-test('Backend Test Case 02 - Should update existing item details ', async () => {
-    await request(app).patch('/item/update/615a2aac3cadc97f1eb07e62').send({
+test('Backend Test Case 10 - Should update existing item details ', async () => {
+    await request(app).patch(`/item/update/${itemTest}`).send({
         quantity:5,
         individualTotprice:3500,
-        itemId:"615a3b3c46370bf2ea8b51be"
+        itemId:"6162b16234f3ff3e957d29a6"
     }).expect(200).then((res) => {
         id = res.body._id;
     });
@@ -233,8 +243,8 @@ test('Backend Test Case 02 - Should update existing item details ', async () => 
 
 
 
-test('Backend Test Case 02 - Should update existing order details ', async () => {
-    await request(app).patch('/order/update/6159da59ce25f7ccbfd45154').send({
+test('Backend Test Case 11 - Should update existing order details ', async () => {
+    await request(app).patch(`/order/update/${orderTest}`).send({
         orderRefNo:"001",
         description:"Namal Hardware",
         issueDate:"2021-06-11T00:00:00.000+00:00",
@@ -243,9 +253,9 @@ test('Backend Test Case 02 - Should update existing order details ', async () =>
         totalPrice:158000,
         approvalStatus:"Approved",
         orderStatus:"Delivered",
-        site:"6158a15b61eddafb1da8c6e6",
-        supplier:"615ab95e3a408e6c619b6d5f",
-        items:["6158b0f2bee91146251189d4"]
+        site:"6162b739fff9f99515c181ff",
+        supplier:"6162a7ab3078af8b2b3ac506",
+        items:["615a3b3c46370bf2ea8b51be"]
         
     }).expect(200).then((res) => {
         id = res.body._id;
@@ -254,8 +264,8 @@ test('Backend Test Case 02 - Should update existing order details ', async () =>
 
 
 
-test('Backend Test Case 02 - Should update existing supplier details ', async () => {
-    await request(app).patch('/supplier/update/615aab713a408e6c619b6d53').send({
+test('Backend Test Case 12 - Should update existing supplier details ', async () => {
+    await request(app).patch(`/supplier/update/${supplierTest}`).send({
         supplierId:"002",
         supplierName:"Amal",
         address:"Colombo 7",
@@ -266,8 +276,8 @@ test('Backend Test Case 02 - Should update existing supplier details ', async ()
 })
 
 
-test('Backend Test Case 02 - Should update existing employee details ', async () => {
-    await request(app).patch('/employee/update/61589e657a434a8a7bb0b46e').send({
+test('Backend Test Case 13 - Should update existing employee details ', async () => {
+    await request(app).patch(`/employee/update/${employeeTest}`).send({
         empId:251,
         empName:"Isira Bandara",
         email:"isira@flex.com",
@@ -280,10 +290,10 @@ test('Backend Test Case 02 - Should update existing employee details ', async ()
 })
 
 
-test('Backend Test Case 02 - Should update existing good details ', async () => {
-    await request(app).patch('/good/update/6158b00f482c92df01a942ee').send({
+test('Backend Test Case 14 - Should update existing good details ', async () => {
+    await request(app).patch(`/good/update/${goodTest}`).send({
         goodId:4,
-        goodName:"Cement",
+        goodName:"Bricks",
         description:"4 instruments",
         itemPrice:4000
     }).expect(200).then((res) => {
@@ -291,184 +301,180 @@ test('Backend Test Case 02 - Should update existing good details ', async () => 
     });
 })
 
+// //test case 03 - get specific details -8
+// test('Backend Test Case 03 - Should get specific payment details' , async () => {
+//     await request(app).get(`/payment/${paymentTest}`).send({
+//     }).expect(200).then((res) => {
+//         id = res.body._id;
+//     });
+// })
 
-
-//test case 03 - delete  details
-test('Backend Test Case 03 - Should delete existing room details ', async () => {
-    await request(app).delete('/payment/6158b6a81b9b8448562b1144').send({
+test('Backend Test Case 15 - Should get specific log details' , async () => {
+    await request(app).get(`/log/${logTest}`).send({
     }).expect(200).then((res) => {
         id = res.body._id;
     });
 })
 
-
-test('Backend Test Case 03 - Should delete existing log details ', async () => {
-    await request(app).delete('/log/615acb7e82ce97706829b58e').send({
+test('Backend Test Case 16 - Should get specific delivery details' , async () => {
+    await request(app).get(`/delivery/${deliveryTest}`).send({
     }).expect(200).then((res) => {
         id = res.body._id;
     });
 })
 
-test('Backend Test Case 03 - Should delete existing delivery details ', async () => {
-    await request(app).delete('/delivery/615b2c2ac5dab5e91e427045').send({
+test('Backend Test Case 17 - Should get specific item details' , async () => {
+    await request(app).get(`/item/${itemTest}`).send({
     }).expect(200).then((res) => {
         id = res.body._id;
     });
 })
 
-test('Backend Test Case 03 - Should delete existing item details ', async () => {
-    await request(app).delete('/item/615a2aac3cadc97f1eb07e62').send({
+test('Backend Test Case 18 - Should get specific order details' , async () => {
+    await request(app).get(`/order/${orderTest}`).send({
     }).expect(200).then((res) => {
         id = res.body._id;
     });
 })
 
-test('Backend Test Case 03 - Should delete existing order details ', async () => {
-    await request(app).delete('/order/6159da59ce25f7ccbfd45154').send({
+test('Backend Test Case 19 - Should get specific supplier details' , async () => {
+    await request(app).get(`/supplier/${supplierTest}`).send({
     }).expect(200).then((res) => {
         id = res.body._id;
     });
 })
 
-test('Backend Test Case 03 - Should delete existing supplier details ', async () => {
-    await request(app).delete('/supplier/615ab95e3a408e6c619b6d5f').send({
+test('Backend Test Case 20 - Should get specific employee details' , async () => {
+    await request(app).get(`/employee/${employeeTest}`).send({
     }).expect(200).then((res) => {
         id = res.body._id;
     });
 })
 
-test('Backend Test Case 03 - Should delete existing employee details ', async () => {
-    await request(app).delete('/employee/61589e657a434a8a7bb0b46e').send({
+test('Backend Test Case 21 - Should get specific good details' , async () => {
+    await request(app).get(`/good/${goodTest}`).send({
     }).expect(200).then((res) => {
         id = res.body._id;
     });
 })
 
-test('Backend Test Case 03 - Should delete existing good details ', async () => {
-    await request(app).delete('/good/6158b00f482c92df01a942ee').send({
-    }).expect(200).then((res) => {
-        id = res.body._id;
-    });
-})
-
-
-//test case 04 - get specific room details
-test('Backend Test Case 04 - Should get specific payment details' , async () => {
-    await request(app).get('/payment/6158b6a81b9b8448562b1144').send({
-    }).expect(200).then((res) => {
-        id = res.body._id;
-    });
-})
-
-test('Backend Test Case 04 - Should get specific log details' , async () => {
-    await request(app).get('/log/615acb4982ce97706829b580').send({
-    }).expect(200).then((res) => {
-        id = res.body._id;
-    });
-})
-
-test('Backend Test Case 04 - Should get specific delivery details' , async () => {
-    await request(app).get('/delivery/615b2c2ac5dab5e91e427045').send({
-    }).expect(200).then((res) => {
-        id = res.body._id;
-    });
-})
-
-test('Backend Test Case 04 - Should get specific item details' , async () => {
-    await request(app).get('/item/615a2aac3cadc97f1eb07e62').send({
-    }).expect(200).then((res) => {
-        id = res.body._id;
-    });
-})
-
-test('Backend Test Case 04 - Should get specific order details' , async () => {
-    await request(app).get('/order/6159da59ce25f7ccbfd45154').send({
-    }).expect(200).then((res) => {
-        id = res.body._id;
-    });
-})
-
-test('Backend Test Case 04 - Should get specific supplier details' , async () => {
-    await request(app).get('/supplier/615ab95e3a408e6c619b6d5f').send({
-    }).expect(200).then((res) => {
-        id = res.body._id;
-    });
-})
-
-test('Backend Test Case 04 - Should get specific employee details' , async () => {
-    await request(app).get('/employee/61589e657a434a8a7bb0b46e').send({
-    }).expect(200).then((res) => {
-        id = res.body._id;
-    });
-})
-
-test('Backend Test Case 04 - Should get specific good details' , async () => {
-    await request(app).get('/good/6158b00f482c92df01a942ee').send({
-    }).expect(200).then((res) => {
-        id = res.body._id;
-    });
-})
-
-
-
-
-
-//test case 14 - get all booking details
-test('Backend Test Case 14 - Should get all payment details', async () => {
+//test case 04 - get all  details -8
+test('Backend Test Case 22 - Should get all payment details', async () => {
     await request(app).get('/payment/').send({  
     }).expect(200).then((res) => {
         id = res.body._id;
     });
 })
 
-test('Backend Test Case 14 - Should get all log details ', async () => {
+test('Backend Test Case 23 - Should get all log details ', async () => {
     await request(app).get('/log/').send({  
     }).expect(200).then((res) => {
         id = res.body._id;
     });
 })
 
-test('Backend Test Case 14 - Should get all delivery details ', async () => {
+test('Backend Test Case 24 - Should get all delivery details ', async () => {
     await request(app).get('/delivery/').send({  
     }).expect(200).then((res) => {
         id = res.body._id;
     });
 })
 
-test('Backend Test Case 14 - Should get all item details ', async () => {
+test('Backend Test Case 25 - Should get all item details ', async () => {
     await request(app).get('/item/').send({  
     }).expect(200).then((res) => {
         id = res.body._id;
     });
 })
 
-test('Backend Test Case 14 - Should get all order details ', async () => {
+test('Backend Test Case 26 - Should get all order details ', async () => {
     await request(app).get('/order/').send({  
     }).expect(200).then((res) => {
         id = res.body._id;
     });
 })
 
-test('Backend Test Case 14 - Should get all supplier details ', async () => {
+test('Backend Test Case 27 - Should get all supplier details ', async () => {
     await request(app).get('/supplier/').send({  
     }).expect(200).then((res) => {
         id = res.body._id;
     });
 })
 
-test('Backend Test Case 14 - Should get all employee details ', async () => {
+test('Backend Test Case 28 - Should get all employee details ', async () => {
     await request(app).get('/employee/').send({  
     }).expect(200).then((res) => {
         id = res.body._id;
     });
 })
 
-test('Backend Test Case 14 - Should get all good details ', async () => {
+test('Backend Test Case 29 - Should get all good details ', async () => {
     await request(app).get('/good/').send({  
+    }).expect(200).then((res) => {
+        id = res.body;
+        console.log(id);
+    });
+})
+
+// //test case 05 - delete  details -8
+// test('Backend Test Case 05 - Should delete existing payment details ', async () => {
+//     await request(app).delete(`/payment/${paymentTest}`).send({
+//     }).expect(200).then((res) => {
+//         id = res.body._id;
+//     });
+// })
+
+
+test('Backend Test Case 30 - Should delete existing log details ', async () => {
+    await request(app).delete(`/log/${logTest}`).send({
     }).expect(200).then((res) => {
         id = res.body._id;
     });
 })
+
+test('Backend Test Case 31 - Should delete existing delivery details ', async () => {
+    await request(app).delete(`/delivery/${deliveryTest}`).send({
+    }).expect(200).then((res) => {
+        id = res.body._id;
+    });
+})
+
+test('Backend Test Case 32 - Should delete existing item details ', async () => {
+    await request(app).delete(`/item/${itemTest}`).send({
+    }).expect(200).then((res) => {
+        id = res.body._id;
+    });
+})
+
+// test('Backend Test Case 05 - Should delete existing order details ', async () => {
+//     await request(app).delete(`/order/${orderTest}`).send({
+//     }).expect(200).then((res) => {
+//         id = res.body._id;
+//     });
+// })
+
+test('Backend Test Case 33 - Should delete existing supplier details ', async () => {
+    await request(app).delete(`/supplier/${supplierTest}`).send({
+    }).expect(200).then((res) => {
+        id = res.body._id;
+    });
+})
+
+test('Backend Test Case 34 - Should delete existing employee details ', async () => {
+    await request(app).delete(`/employee/${employeeTest}`).send({
+    }).expect(200).then((res) => {
+        id = res.body._id;
+    });
+})
+
+test('Backend Test Case 35 - Should delete existing good details ', async () => {
+    await request(app).delete(`/good/${goodTest}`).send({
+    }).expect(200).then((res) => {
+        id = res.body._id;
+    });
+})
+
+
 
 
 
