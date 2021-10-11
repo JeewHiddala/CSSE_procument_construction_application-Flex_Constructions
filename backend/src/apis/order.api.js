@@ -10,8 +10,14 @@ module.exports = function () {
     router.get('/searchWithoutDateRange/', orderController.getSearchedOrderDetailsWithoutDateRange);  // get search order details using service number.
     router.get('/:id', orderController.getSelectedOrderDetails);       //get all order.
     router.get('/charge/:id', orderController.calculateCount);
-    router.get('/search/:orderRefNo', orderController.getSearchedOrderDetails);  // get search order details using service number.
-    router.patch('/update/:id',orderController. updateSelectedOrderDetails);
     
+
+ 
+    router.get('/search/:orderRefNo', orderController.getSearchedOrderDetails);  // get search order details using service number.
+
+    router.patch('/update/:id',orderController. updateSelectedOrderDetails);
     return router;
+
+    
+
 }

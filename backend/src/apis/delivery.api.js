@@ -7,6 +7,5 @@ module.exports = function () {
     router.get('/', deliveryController.getAllDeliveryDetails);
     router.get('/:id', deliveryController.getSelectedDeliveryDetails);
     router.delete('/:id', deliveryController.deleteDelivery);// delete a serviceList
-
     return router;
 }

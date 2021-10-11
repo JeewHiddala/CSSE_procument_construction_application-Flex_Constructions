@@ -138,7 +138,7 @@ class CategoriesDashboardGManager extends Component {
                             <div className="card-body">
                                 <h5 className="card-title">Delivery Management</h5>
                                 <p className="card-text">Delivery management is the function of applying processes to ensure goods are effectively and efficiently transferred from one location to the next.</p>
-                                <a href="/delivery-dashboard" class="btn btn-primary">Go somewhere</a>
+                                <a href="/delivery-dashboard" class="btn btn-primary">Go Delivery Management</a>
                             </div>
                         </div>
                     </div>             

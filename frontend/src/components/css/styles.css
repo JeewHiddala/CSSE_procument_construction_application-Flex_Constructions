@@ -261,7 +261,7 @@
   }
   
 
-.col-3,.col-8{
+/* .col-3,.col-8{
     border-style: solid;
     background-color: white;
     margin: 5px;
@@ -271,7 +271,7 @@
 .col-1{
     font-weight: bold;
     font-size: 30px;
-}
+} */
 
 #btn-tab{
     width: 90px;
@@ -308,3 +308,53 @@
   }
 
 
+
+  .deliverybtn{
+    float: right;
+    padding: 15px 32px;
+    margin: 5px;
+    border: 10px;
+}
+
+/* #button{
+    margin: 1px;
+    
+  } */
+
+#button1{
+    margin: 1px;
+    border-radius: 40px;
+    letter-spacing: 1px;
+  }
+
+  .container-dash{
+   
+    background-color: rgb(253, 253, 253);
+    width:95%;
+   
+    
+}
+.container-delivery{
+    border-style: solid;
+    background-color: rgb(253, 253, 253);
+    width:85%;
+    padding: 10px;
+    margin: 5px;
+    
+}
+.container-delivery1{
+    border-style: solid;
+    background-color: rgb(253, 253, 253);
+    width:55%;
+    padding: 10px;
+    margin: 5px;
+    
+}
+.container-delivery2{
+    border-style: solid;
+    background-color: rgb(253, 253, 253);
+    width:100%;
+    padding: 15px;
+    margin: 5px;
+    
+}

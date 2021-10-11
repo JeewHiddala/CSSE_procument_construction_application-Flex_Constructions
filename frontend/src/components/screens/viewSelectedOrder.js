@@ -41,9 +41,9 @@ class viewOrder extends Component {
 
     componentDidMount() {
 
-        const { data } = this.props.location
-
-        console.log("userid: " + data);
+        const data  = this.props.match.params.id
+        console.log("ABCDE: " , this.props.match.params.id);
+        console.log("userid: " ,data);
         axios.get(`http://localhost:8300/order/${data}`)
             .then(response => {
                 this.setState({ orders: response.data.data });
@@ -79,9 +79,9 @@ class viewOrder extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        const { data } = this.props.location
+        const data  = this.props.match.params.id
 
-        console.log("userid: " + data);
+        console.log("useridA: " , this.props.match.params.id);
         let log = {
 
             orderRef: data,
@@ -115,7 +115,7 @@ class viewOrder extends Component {
                             ' Saving!',
                             'success'
                         )
-                        window.location = '/order'
+                        window.location = '/orders'
                     })
                     .catch(error => {
                         console.log(error.message);
