@@ -190,7 +190,9 @@ back(e) {                                                                  //bac
                                                 placeholder = "Enter Supplier Contact Number"
                                                 id="contactNo"
                                                 name="contactNo"    //give state name
-                                                pattern="+[0-9]{11}"
+                                                pattern="[0-9]{11}"
+                                                min="11"
+                                                max="11"
                                                 required
                                                 value={this.state.contactNo}      //bind state value
                                                 onChange={this.onChange}    //don't call function. only give a reference.

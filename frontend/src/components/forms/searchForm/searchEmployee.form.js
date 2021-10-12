@@ -249,19 +249,15 @@ back(e) {            //back
                                         </div>
                                         <div className="col">
                                             <label htmlFor="position" className="form-label sub-topic">Position</label>
-                                            <select className="form-select" aria-label="Default select example"
-                                                        onChange={this.onChange}
-                                                        value={this.state.position}
-                                                        name="position"
+                                                    <input
                                                         readOnly
-                                                    >
-                                                        <option selected>Open this select position</option>
-                                                        <option value="General Manager">General Manager</option>
-                                                        <option value="Line Manager">Line Manager</option>
-                                                        <option value="Site Manager">Site Manager</option>
-                                                        <option value="Supervicer">Supervicer</option>
-                                                        <option value="Goods Receiver">Goods Receiver</option>
-                                                    </select>
+                                                        type="text"
+                                                        className="form-control"
+                                                        id="position"
+                                                        name="position"    //give state name
+                                                        value={this.state.position}      //bind state value
+                                                        onChange={this.onChange}    //don't call function. only give a reference.
+                                                    />
                                         </div>
                                         </div>
                                             <br></br>
